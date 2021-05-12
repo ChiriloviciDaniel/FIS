@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proiect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class register extends javax.swing.JFrame {
 
@@ -117,34 +110,11 @@ public class register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/*
-    public void insert(String nume, String prenume, String username, String password)  {
-        Connection con;
-        try {
-            con = dbCon.ConnectionDB();
-             PreparedStatement ps = null;
-        String sql = "INSERT INTO users(nume,prenume,username,password) VALUES(?,?,?,?) ";
-        ps = con.prepareStatement(sql);
-     //
-              ps.setString(1, nume);
-        ps.setString(2, prenume);
-        ps.setString(3, username);
-        ps.setString(4, password);
-        ps.execute();
-        JOptionPane.showMessageDialog(this, "account was successsfully registered!");
-        } catch (SQLException ex) {
-            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-       
-      
-        
-    }*/
+
 public void insert(String a,String b,String c,String d){
     try{
-            
-
-            String sql = "INSERT INTO users(nume,prenume,username,password) VALUES(?,?,?,?) ";
+        
+            String sql = "INSERT INTO user(nume,prenume,username,password) VALUES(?,?,?,?); ";
             ps = conn.prepareStatement(sql);
             ps.setString(1, a);
             ps.setString(2, b);
@@ -152,13 +122,13 @@ public void insert(String a,String b,String c,String d){
             ps.setString(4, d);
 
             ps.execute();
-            JOptionPane.showMessageDialog(null, sql);
+            JOptionPane.showMessageDialog(null, "new account is registered successfully");
             ps.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        JOptionPane.showMessageDialog(null, "dsadasd");
+
     }
 
 
