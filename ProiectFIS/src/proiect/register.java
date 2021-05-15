@@ -124,6 +124,7 @@ public void insert(String a,String b,String c,String d){
             ps.execute();
             JOptionPane.showMessageDialog(null, "new account is registered successfully");
             ps.close();
+            conn.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

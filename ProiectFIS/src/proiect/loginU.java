@@ -130,6 +130,8 @@ public class loginU extends javax.swing.JFrame {
             
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "Login successful!");
+                rs.close();
+                pst.close();
                 magOn mg =new magOn();
                 mg.setVisible(true);
                 mg.pack();
