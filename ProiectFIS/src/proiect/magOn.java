@@ -1,4 +1,3 @@
-
 package proiect;
 
 import javax.swing.JFrame;
@@ -8,18 +7,18 @@ import net.proteanit.sql.DbUtils;
 
 public class magOn extends javax.swing.JFrame {
 
-    Connection conn=null;
-    PreparedStatement ps=null;
-    ResultSet rs=null;
- 
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
     public magOn() {
         initComponents();
-        conn=dbCon.ConnectionDB();
+        conn = dbCon.ConnectionDB();
         updateTable();
     }
-   
 
-     /*
+
+    /*
     public ArrayList<comenzi> comList(){
          public ArrayList<comenzi> comList=new ArrayList<>();
          Connection conn=null;
@@ -31,20 +30,21 @@ public class magOn extends javax.swing.JFrame {
                  
                  
     }*/
-    private void updateTable(){
-    String sql="SELECT * FROM comenzi";
-    try{
-        ps=conn.prepareStatement(sql);
-        rs=ps.executeQuery();
-        table_comenzi.setModel(DbUtils.resultSetToTableModel(rs));
-        rs.close();
-        ps.close();
-       // conn.close();
-        
-    }catch(SQLException b){
-        JOptionPane.showMessageDialog(null, b);
+    private void updateTable() {
+        String sql = "SELECT * FROM comenzi";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            table_comenzi.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.close();
+            ps.close();
+            // conn.close();
+
+        } catch (SQLException b) {
+            JOptionPane.showMessageDialog(null, b);
+        }
     }
-    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,7 +72,7 @@ public class magOn extends javax.swing.JFrame {
             }
         });
 
-        hdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HDD", "1TB", "2TB", "5TB" }));
+        hdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HDD", "1TB", "2TB", "5TB", "256GB", "512GB", "1,2T", "1,5T", "2,5T", "6,4T", "7,8T", "10T", "12T", "11T", "127GB", "15T", "3T", "4T", " " }));
         hdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hddActionPerformed(evt);
@@ -153,10 +153,10 @@ public class magOn extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(plv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(plv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,28 +184,27 @@ public class magOn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void insert(String aa,String bb,String cc,String dd,String e,String f){
-    try{
-             String sql="INSERT INTO comenzi(HDD,PlacaV,PlacaB,Procesor,Adresa,Tel) VALUES(?,?,?,?,?,?); ";
-             ps=conn.prepareStatement(sql);
-             ps.setString(1,aa);
-             ps.setString(2, bb);
-             ps.setString(3, cc);
-             ps.setString(4, dd);
-             ps.setString(5, e);
-             ps.setString(6, f);
-             
-             ps.execute();
-             updateTable();
-             JOptionPane.showMessageDialog(null, "Comanda a fost inregistrata cu succes!");
-             ps.close();
-             conn.close();
+    public void insert(String aa, String bb, String cc, String dd, String e, String f) {
+        try {
+            String sql = "INSERT INTO comenzi(HDD,PlacaV,PlacaB,Procesor,Adresa,Tel) VALUES(?,?,?,?,?,?); ";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, aa);
+            ps.setString(2, bb);
+            ps.setString(3, cc);
+            ps.setString(4, dd);
+            ps.setString(5, e);
+            ps.setString(6, f);
 
-        }catch(SQLException a){ 
-             JOptionPane.showMessageDialog(null, a);
+            ps.execute();
+            updateTable();
+            JOptionPane.showMessageDialog(null, "Comanda a fost inregistrata cu succes!");
+            ps.close();
+
+        } catch (SQLException a) {
+            JOptionPane.showMessageDialog(null, a);
         }
-}
+        updateTable();
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         loginU lgu = new loginU();
@@ -222,15 +221,14 @@ public class magOn extends javax.swing.JFrame {
     }//GEN-LAST:event_hddActionPerformed
 
     private void comBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBActionPerformed
-        String a=hdd.getSelectedItem().toString();
-        String b=plv.getSelectedItem().toString();
-        String c=pld.getSelectedItem().toString();
-        String d=pr.getSelectedItem().toString();
-        String e=adrs.getText();
-        String f=nrt.getText();
-        insert(a,b,c,d,e,f);
-        
-  
+        String a = hdd.getSelectedItem().toString();
+        String b = plv.getSelectedItem().toString();
+        String c = pld.getSelectedItem().toString();
+        String d = pr.getSelectedItem().toString();
+        String e = adrs.getText();
+        String f = nrt.getText();
+        insert(a, b, c, d, e, f);
+
         /*String sql="select * from comenzi";
         try{
            rs=ps.executeQuery(); 
@@ -249,8 +247,8 @@ public class magOn extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, z);
                 }
         
-        */
-        
+         */
+
     }//GEN-LAST:event_comBActionPerformed
 
     /**
